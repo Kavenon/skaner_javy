@@ -1,5 +1,6 @@
-import java.util.ArrayList;
-import java.util.Arrays;
+import token.Token;
+
+import java.util.List;
 
 public class Main {
 
@@ -7,14 +8,9 @@ public class Main {
 
     public static void main(String[] args) {
 
-        String[] split = input.split("");
+        List<Token> result = new Scanner(input, new SimpleTokenFactory()).scan();
 
-        ArrayList<String> strings = new ArrayList<String>(Arrays.asList(split));
-        ArrayList<Token> output = new ArrayList<>
-        for (int i = 0; i < strings.size(); i++) {
+        result.forEach(token -> System.out.println(token.toString()));
 
-        }
-
-        System.out.println("Hello World!");
     }
 }
