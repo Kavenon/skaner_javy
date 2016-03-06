@@ -20,6 +20,7 @@ public class Scanner {
     public List<Token> scan(){
         ArrayList<Character> characters = splitToCharacters(input);
 
+        Token previousToken = null;
         for (currentIndex = 0; currentIndex < characters.size(); currentIndex++) {
 
             Character element = characters.get(currentIndex);
@@ -27,8 +28,23 @@ public class Scanner {
 
             Token token = tokenFactory.getToken(element, next, this);
             if(token != null){
-                output.add(token);
+
+                if(previousToken != null && previousToken.hasMoreThanOneCharacter()){
+                    boolean added = previousToken.addNextCharacter(token, element);
+
+                    if(!added){
+                        output.add(token);
+                        previousToken = token;
+                    }
+                }
+                else {
+                    output.add(token);
+                    previousToken = token;
+
+                }
+
             }
+
 
         }
 

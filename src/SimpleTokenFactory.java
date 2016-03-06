@@ -8,7 +8,7 @@ public class SimpleTokenFactory implements TokenFactory {
             return new NumberToken(element);
         }
         else if(Character.isAlphabetic(element)){
-            return new CharacterToken(element);
+            return new IdentificatorToken(element);
         }
         else if(element.equals('+')){
             return new PlusToken();

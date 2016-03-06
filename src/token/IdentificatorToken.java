@@ -3,17 +3,17 @@ package token;
 import java.util.ArrayList;
 import java.util.List;
 
-public class NumberToken implements Token {
+public class IdentificatorToken implements Token {
 
     private List<Character> character = new ArrayList<>();
 
-    public NumberToken(Character character) {
+    public IdentificatorToken(Character character) {
         this.character.add(character);
     }
 
     @Override
     public String toString() {
-        return "Number: " + character;
+        return "Character: " + character;
     }
 
     @Override
@@ -23,10 +23,11 @@ public class NumberToken implements Token {
 
     @Override
     public boolean addNextCharacter(Token element, Character character) {
-        if(element instanceof NumberToken){
+        if(element instanceof NumberToken || element instanceof IdentificatorToken){
             this.character.add(character);
             return true;
         }
         return false;
     }
+
 }
