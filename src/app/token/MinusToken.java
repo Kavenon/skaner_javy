@@ -1,4 +1,4 @@
-package token;
+package app.token;
 
 public class MinusToken implements Token {
 

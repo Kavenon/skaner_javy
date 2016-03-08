@@ -1,4 +1,4 @@
-package token;
+package app.token;
 
 public class MultiplyToken implements Token {
 

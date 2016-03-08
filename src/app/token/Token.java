@@ -1,4 +1,4 @@
-package token;
+package app.token;
 
 public interface Token {
 

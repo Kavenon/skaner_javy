@@ -1,4 +1,7 @@
-import token.*;
+package app;
+
+import app.token.*;
+import app.token.creator.TokenCreator;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -7,44 +10,24 @@ import java.util.List;
 public class Scanner {
 
     private ArrayList<Token> output = new ArrayList<>();
-    private String input;
+    private ArrayList<Character> characters;
     private int currentIndex = 0;
 
     private TokenFactory tokenFactory;
 
     public Scanner(String input, TokenFactory tokenFactory) {
-        this.input = input;
+        this.characters = splitToCharacters(input);
         this.tokenFactory = tokenFactory;
     }
 
-    public List<Token> scan(){
-        ArrayList<Character> characters = splitToCharacters(input);
+    public List<Token> scan() throws UnclosedTagException {
 
-        Token previousToken = null;
         for (currentIndex = 0; currentIndex < characters.size(); currentIndex++) {
 
             Character element = characters.get(currentIndex);
-            Character next = getNextCharacter(characters);
 
-            Token token = tokenFactory.getToken(element, next, this);
-            if(token != null){
-
-                if(previousToken != null && previousToken.hasMoreThanOneCharacter()){
-                    boolean added = previousToken.addNextCharacter(token, element);
-
-                    if(!added){
-                        output.add(token);
-                        previousToken = token;
-                    }
-                }
-                else {
-                    output.add(token);
-                    previousToken = token;
-
-                }
-
-            }
-
+            Token token = tokenFactory.getToken(element, this);
+            output.add(token);
 
         }
 
@@ -56,9 +39,10 @@ public class Scanner {
         currentIndex++;
     }
 
-    private Character getNextCharacter(ArrayList<Character> characters) {
+    public Character getNextCharacter() {
+        currentIndex++;
         try {
-            return characters.get(currentIndex + 1);
+            return characters.get(currentIndex);
         }
         catch(IndexOutOfBoundsException e){
             return null;

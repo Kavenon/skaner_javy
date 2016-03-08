@@ -1,19 +1,19 @@
-package token;
+package app.token;
 
 import java.util.ArrayList;
 import java.util.List;
 
-public class IdentificatorToken implements Token {
+public class NumberToken implements Token {
 
     private List<Character> character = new ArrayList<>();
 
-    public IdentificatorToken(Character character) {
+    public NumberToken(Character character) {
         this.character.add(character);
     }
 
     @Override
     public String toString() {
-        return "Character: " + character;
+        return "Number: " + character;
     }
 
     @Override
@@ -23,11 +23,10 @@ public class IdentificatorToken implements Token {
 
     @Override
     public boolean addNextCharacter(Token element, Character character) {
-        if(element instanceof NumberToken || element instanceof IdentificatorToken){
+        if(element instanceof NumberToken){
             this.character.add(character);
             return true;
         }
         return false;
     }
-
 }
