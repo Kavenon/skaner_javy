@@ -41,10 +41,11 @@ public class FiniteSymbolCreator  {
 
     public Token getToken() throws UnclosedTagException {
 
-        if(symbols.contains(token) && token.getString().length() == currentTokenLength){
+        if(symbols.contains(token.getString()) && token.getString().length() == currentTokenLength){
             return token;
         }
 
+        currentTokenLength = 0;
         return null;
     }
 

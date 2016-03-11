@@ -26,7 +26,9 @@ public class Scanner {
 
             Character element = characters.get(currentIndex);
             Token token = tokenFactory.getToken(element, this);
-            output.add(token);
+            if(token != null){
+                output.add(token);
+            }
 
         }
 
