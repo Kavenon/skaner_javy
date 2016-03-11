@@ -1,16 +1,14 @@
 package app.token;
 
-public class UndefinedToken implements Token {
-
-    private Character character;
+public class UndefinedToken extends Token {
 
     public UndefinedToken(Character element) {
-        this.character = element;
+        this.append(element);
     }
 
     @Override
     public String toString() {
-        return "Undefined: " + character;
+        return "Undefined: " + characters;
     }
 
 }

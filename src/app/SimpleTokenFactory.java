@@ -1,13 +1,16 @@
 package app;
 
 import app.token.*;
-import app.token.creator.NumberTokenCreator;
-import app.token.creator.TokenCreator;
+import app.token.creator.*;
 
 public class SimpleTokenFactory implements TokenFactory {
 
+    private static final WhitespaceCreator whitespaceCreator = new WhitespaceCreator();
     private static final TokenCreator[] allowedTokens = {
+            whitespaceCreator,
             new NumberTokenCreator(),
+            new MathOperatorCreator(),
+            new BooleanCreator(),
     };
 
     @Override
@@ -16,15 +19,26 @@ public class SimpleTokenFactory implements TokenFactory {
         for (TokenCreator tokenCreator : allowedTokens) {
 
             if(tokenCreator.matches(element)){
-
+                scanner.beginTransaction();
                 Character next = scanner.getNextCharacter();
                 tokenCreator.create(element);
-                while(next != null && tokenCreator.hasMoreCharacters() && tokenCreator.matches(next)){
-                    tokenCreator.append(next);
-                    next = scanner.getNextCharacter();
-                }
-                return tokenCreator.getToken();
 
+                if(next != null && !whitespaceCreator.matches(next)) {
+
+                    while (next != null && tokenCreator.hasMoreCharacters()) {
+                        if (tokenCreator.matches(next)) {
+                            tokenCreator.append(next);
+                            next = scanner.getNextCharacter();
+                        } else {
+                            break;
+                        }
+                    }
+                }
+
+                if (tokenCreator.getToken() != null) {
+                    scanner.commit();
+                    return tokenCreator.getToken();
+                }
             }
         }
 

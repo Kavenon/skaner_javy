@@ -1,7 +1,6 @@
 package app;
 
-import app.token.*;
-import app.token.creator.TokenCreator;
+import app.token.Token;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -12,6 +11,7 @@ public class Scanner {
     private ArrayList<Token> output = new ArrayList<>();
     private ArrayList<Character> characters;
     private int currentIndex = 0;
+    private int tempIndex = 0;
 
     private TokenFactory tokenFactory;
 
@@ -22,10 +22,9 @@ public class Scanner {
 
     public List<Token> scan() throws UnclosedTagException {
 
-        for (currentIndex = 0; currentIndex < characters.size(); currentIndex++) {
+        for (currentIndex = 0; currentIndex < characters.size(); ++currentIndex) {
 
             Character element = characters.get(currentIndex);
-
             Token token = tokenFactory.getToken(element, this);
             output.add(token);
 
@@ -35,14 +34,22 @@ public class Scanner {
 
     }
 
+    public void beginTransaction(){
+        tempIndex = currentIndex;
+    }
+
+    public void commit(){
+        currentIndex = tempIndex-1;
+    }
+
     public void skipElement(){
         currentIndex++;
     }
 
     public Character getNextCharacter() {
-        currentIndex++;
+        tempIndex++;
         try {
-            return characters.get(currentIndex);
+            return characters.get(tempIndex);
         }
         catch(IndexOutOfBoundsException e){
             return null;

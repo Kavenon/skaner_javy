@@ -1,32 +1,14 @@
 package app.token;
 
-import java.util.ArrayList;
-import java.util.List;
-
-public class NumberToken implements Token {
-
-    private List<Character> character = new ArrayList<>();
+public class NumberToken extends Token {
 
     public NumberToken(Character character) {
-        this.character.add(character);
+        this.append(character);
     }
 
     @Override
     public String toString() {
-        return "Number: " + character;
+        return "Number: " + characters;
     }
 
-    @Override
-    public boolean hasMoreThanOneCharacter() {
-        return true;
-    }
-
-    @Override
-    public boolean addNextCharacter(Token element, Character character) {
-        if(element instanceof NumberToken){
-            this.character.add(character);
-            return true;
-        }
-        return false;
-    }
 }
