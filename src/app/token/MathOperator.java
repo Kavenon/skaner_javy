@@ -6,9 +6,4 @@ public class MathOperator extends Token {
         this.append(character);
     }
 
-    @Override
-    public String toString() {
-        return "MathOperator: " + characters;
-    }
-
 }

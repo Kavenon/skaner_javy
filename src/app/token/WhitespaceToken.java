@@ -6,9 +6,4 @@ public class WhitespaceToken extends Token {
         this.append(character);
     }
 
-    @Override
-    public String toString() {
-        return "Whitespace: " + characters;
-    }
-
 }

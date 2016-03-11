@@ -9,20 +9,11 @@ import java.util.List;
 
 public class WhitespaceCreator implements TokenCreator {
 
-    private static final List<String> mathOperators = Arrays.asList(
-            " "
-    );
-
     private Token token;
 
     @Override
     public boolean matches(Character element) {
-
-        return mathOperators
-                .stream()
-                .filter(x -> x.equals(element.toString()))
-                .findAny()
-                .isPresent();
+        return Character.isWhitespace(element);
     }
 
     @Override

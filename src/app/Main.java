@@ -6,7 +6,7 @@ import java.util.List;
 
 public class Main {
 
-    private static final String input = "==";
+    private static final String input = "+== +";
 
     public static void main(String[] args) {
 

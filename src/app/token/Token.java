@@ -23,4 +23,9 @@ public abstract class Token {
     public String getString(){
          return characters.stream().map(Object::toString).collect(Collectors.joining());
     }
+
+    @Override
+    public String toString() {
+        return getClass().getSimpleName() + ": ["+getString()+"]";
+    }
 }
