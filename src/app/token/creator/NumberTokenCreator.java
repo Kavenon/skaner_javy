@@ -1,35 +1,24 @@
 package app.token.creator;
 
-import app.Scanner;
 import app.UnclosedTagException;
 import app.token.NumberToken;
 import app.token.Token;
 
-public class NumberTokenCreator implements TokenCreator {
-
+public class NumberTokenCreator extends BaseTokenCreator implements TokenCreator {
 
     @Override
     public boolean matches(Character element) {
-        return false;
+        return Character.isDigit(element);
     }
 
     @Override
     public Token getToken() throws UnclosedTagException {
-        return null;
+        return token;
     }
 
     @Override
     public void create(Character element) {
-
+        token = new NumberToken(element);
     }
 
-    @Override
-    public boolean hasMoreCharacters() {
-        return false;
-    }
-
-    @Override
-    public void append(Character next) {
-
-    }
 }

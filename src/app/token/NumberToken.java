@@ -6,9 +6,4 @@ public class NumberToken extends Token {
         this.append(character);
     }
 
-    @Override
-    public String toString() {
-        return "Number: " + characters;
-    }
-
 }

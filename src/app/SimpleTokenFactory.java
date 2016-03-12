@@ -11,6 +11,8 @@ public class SimpleTokenFactory implements TokenFactory {
             new NumberTokenCreator(),
             new MathOperatorCreator(),
             new BooleanCreator(),
+            new IdentificatorCreator(),
+            new ParenthesisCreator(),
     };
 
     @Override
@@ -23,7 +25,7 @@ public class SimpleTokenFactory implements TokenFactory {
                 Character next = scanner.getNextCharacter();
                 tokenCreator.create(element);
 
-                if(next != null && (!whitespaceCreator.matches(next) || tokenCreator instanceof WhitespaceCreator)) {
+                if(next != null && (!whitespaceCreator.matches(next) || tokenCreator instanceof WhitespaceCreator || tokenCreator instanceof ParenthesisCreator)) {
 
                     while (next != null && tokenCreator.hasMoreCharacters()) {
                         if (tokenCreator.matches(next)) {
@@ -36,12 +38,13 @@ public class SimpleTokenFactory implements TokenFactory {
                 }
 
                 if (tokenCreator.getToken() != null) {
-                    scanner.commit();
+                    if(!(tokenCreator instanceof ParenthesisCreator)){
+                        scanner.commit();
+                    }
                     return tokenCreator.getToken();
                 }
             }
         }
-
         return new UndefinedToken(element);
 
 //        if(Character.isDigit(element)){

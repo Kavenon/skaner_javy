@@ -4,6 +4,7 @@ import app.token.Token;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Collections;
 import java.util.List;
 
 public class Scanner {
@@ -32,8 +33,15 @@ public class Scanner {
 
         }
 
-        return output;
+        if(validate(output))
+            return output;
 
+        return Collections.emptyList();
+
+    }
+
+    public boolean validate(List<Token> output) throws UnclosedTagException {
+        return new ParenthesisValidator().valid(output);
     }
 
     public void beginTransaction(){
@@ -42,10 +50,6 @@ public class Scanner {
 
     public void commit(){
         currentIndex = tempIndex-1;
-    }
-
-    public void skipElement(){
-        currentIndex++;
     }
 
     public Character getNextCharacter() {
@@ -57,7 +61,6 @@ public class Scanner {
             return null;
         }
     }
-
 
     private ArrayList<Character> splitToCharacters(String input) {
         Character[] charObjectArray = input.chars()
