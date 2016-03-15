@@ -1,15 +1,15 @@
-package app.token.creator;
+package app.creator;
 
 import app.UnclosedTagException;
-import app.token.CurlyBracketToken;
+import app.token.ParenthesisToken;
 import app.token.Token;
 
 import java.util.Arrays;
 import java.util.List;
 
-public class CurlyBracketCreator extends BaseTokenCreator implements TokenCreator {
+public class ParenthesisCreator extends BaseTokenCreator implements TokenCreator {
 
-    private static List<Character> allowedCharacters = Arrays.asList('{', '}');
+    private static List<Character> allowedCharacters = Arrays.asList('(', ')');
 
     @Override
     public boolean matches(Character element) throws UnclosedTagException {
@@ -23,7 +23,7 @@ public class CurlyBracketCreator extends BaseTokenCreator implements TokenCreato
 
     @Override
     public void create(Character element) {
-        token = new CurlyBracketToken(element);
+        token = new ParenthesisToken(element);
     }
 
     @Override

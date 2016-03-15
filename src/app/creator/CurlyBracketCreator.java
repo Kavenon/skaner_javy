@@ -1,19 +1,19 @@
-package app.token.creator;
+package app.creator;
 
 import app.UnclosedTagException;
+import app.token.CurlyBracketToken;
 import app.token.Token;
-import app.token.WhitespaceToken;
 
 import java.util.Arrays;
 import java.util.List;
 
-public class WhitespaceCreator implements TokenCreator {
+public class CurlyBracketCreator extends BaseTokenCreator implements TokenCreator {
 
-    private Token token;
+    private static List<Character> allowedCharacters = Arrays.asList('{', '}');
 
     @Override
-    public boolean matches(Character element) {
-        return Character.isWhitespace(element);
+    public boolean matches(Character element) throws UnclosedTagException {
+        return allowedCharacters.contains(element);
     }
 
     @Override
@@ -23,18 +23,15 @@ public class WhitespaceCreator implements TokenCreator {
 
     @Override
     public void create(Character element) {
-        token = new WhitespaceToken(element);
+        token = new CurlyBracketToken(element);
     }
 
     @Override
     public boolean hasMoreCharacters() {
-        return true;
+        return false;
     }
 
     @Override
     public void append(Character next) {
-        token.append(next);
     }
-
-
 }

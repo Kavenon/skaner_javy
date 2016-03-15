@@ -1,4 +1,4 @@
-package app.token.creator;
+package app.creator;
 
 import app.token.MathOperator;
 

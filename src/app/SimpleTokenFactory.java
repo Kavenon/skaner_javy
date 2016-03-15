@@ -1,7 +1,7 @@
 package app;
 
 import app.token.*;
-import app.token.creator.*;
+import app.creator.*;
 
 public class SimpleTokenFactory implements TokenFactory {
 
