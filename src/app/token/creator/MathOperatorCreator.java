@@ -18,6 +18,7 @@ public class MathOperatorCreator extends FiniteSymbolCreator implements TokenCre
 
     @Override
     public void create(Character element) {
+        currentTokenLength = 1;
         token = new MathOperator(element);
     }
 

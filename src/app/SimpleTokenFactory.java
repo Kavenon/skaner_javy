@@ -9,10 +9,15 @@ public class SimpleTokenFactory implements TokenFactory {
     private static final TokenCreator[] allowedTokens = {
             whitespaceCreator,
             new NumberTokenCreator(),
-            new MathOperatorCreator(),
             new BooleanCreator(),
+            new MathOperatorCreator(),
             new IdentificatorCreator(),
             new ParenthesisCreator(),
+            new CurlyBracketCreator(),
+            new SquareBracketCreator(),
+            new AnnotationCreator(),
+            new CharacterCreator(),
+            new StringCreator(),
     };
 
     @Override
@@ -25,7 +30,7 @@ public class SimpleTokenFactory implements TokenFactory {
                 Character next = scanner.getNextCharacter();
                 tokenCreator.create(element);
 
-                if(next != null && (!whitespaceCreator.matches(next) || tokenCreator instanceof WhitespaceCreator || tokenCreator instanceof ParenthesisCreator)) {
+                if(next != null && (!whitespaceCreator.matches(next) || tokenCreator instanceof WhitespaceCreator)) {
 
                     while (next != null && tokenCreator.hasMoreCharacters()) {
                         if (tokenCreator.matches(next)) {
@@ -37,11 +42,10 @@ public class SimpleTokenFactory implements TokenFactory {
                     }
                 }
 
-                if (tokenCreator.getToken() != null) {
-                    if(!(tokenCreator instanceof ParenthesisCreator)){
-                        scanner.commit();
-                    }
-                    return tokenCreator.getToken();
+                Token token = tokenCreator.getToken();
+                if (token != null) {
+                    scanner.commit();
+                    return token;
                 }
             }
         }

@@ -17,17 +17,32 @@ public class FiniteSymbolCreator  {
         this.maxLength = symbols.stream().map(String::length).max(Comparator.comparingInt(value -> value)).get();
     }
 
-    private int currentTokenLength;
+    protected int currentTokenLength;
     protected Token token;
 
+    private boolean matchesBefore(char[] chars){
+        boolean matchesBefore = false;
+        if(token != null){
+            for(int i = 0; i < currentTokenLength;i++){
+                if(token.getCharacters().get(i).equals(chars[i])){
+                    matchesBefore = true;
+                }
+            }
+        }
+        return matchesBefore;
+    }
     public boolean matches(Character element) {
 
         for (String operator : symbols) {
             char[] chars = operator.toCharArray();
             try {
                 if(element.equals(chars[currentTokenLength])){
-                    currentTokenLength++;
-                    return true;
+
+                    if(token == null || matchesBefore(chars)){
+                        currentTokenLength++;
+                        return true;
+                    }
+
                 }
             }
             catch(Exception e){
@@ -35,12 +50,12 @@ public class FiniteSymbolCreator  {
 
         }
 
-        currentTokenLength++;
+//        currentTokenLength++;
         return false;
     }
 
     public Token getToken() throws UnclosedTagException {
-
+// sprawdzic czy mozna usunac length
         if(symbols.contains(token.getString()) && token.getString().length() == currentTokenLength){
             return token;
         }

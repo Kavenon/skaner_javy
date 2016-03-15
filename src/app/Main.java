@@ -6,7 +6,7 @@ import java.util.List;
 
 public class Main {
 
-    private static final String input = "x = ";
+    private static final String input = "if (1==1) {} @annotation \"adfadf\"   fhdh";
     public static void main(String[] args) {
 
         try {

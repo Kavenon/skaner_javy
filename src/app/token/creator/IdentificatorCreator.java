@@ -14,7 +14,7 @@ public class IdentificatorCreator extends BaseTokenCreator implements TokenCreat
 
     @Override
     public Token getToken() throws UnclosedTagException {
-        if(KeywordToken.isClassKeyword(token.getString()))
+        if(KeywordToken.isKeyword(token.getString()))
             return new KeywordToken(token.getCharacters());
         return token;
     }
