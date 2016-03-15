@@ -6,4 +6,9 @@ public class MathOperator extends Token {
         this.append(character);
     }
 
+    @Override
+    public String color() {
+        return "#EB4CFF";
+    }
+
 }

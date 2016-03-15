@@ -38,4 +38,8 @@ public class KeywordToken extends Token {
         return classKeywords.contains(token) ;
     }
 
+    @Override
+    public String color() {
+        return "#6B177F";
+    }
 }

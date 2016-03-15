@@ -11,4 +11,8 @@ public class UndefinedToken extends Token {
         return "Undefined: " + characters;
     }
 
+    @Override
+    public String color() {
+        return "#ff0000";
+    }
 }

@@ -6,4 +6,8 @@ public class CharacterToken extends Token {
         this.append(character);
     }
 
+    @Override
+    public String color() {
+        return "#008055";
+    }
 }

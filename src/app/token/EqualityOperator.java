@@ -6,4 +6,8 @@ public class EqualityOperator extends Token {
         this.append(character);
     }
 
+    @Override
+    public String color() {
+        return "#FF6106";
+    }
 }

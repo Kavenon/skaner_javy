@@ -6,4 +6,8 @@ public class NumberToken extends Token {
         this.append(character);
     }
 
+    @Override
+    public String color() {
+        return "#0909FE";
+    }
 }

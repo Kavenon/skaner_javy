@@ -24,8 +24,15 @@ public abstract class Token {
          return characters.stream().map(Object::toString).collect(Collectors.joining());
     }
 
+    public String getHtml(){
+        return getString();
+    }
+
     @Override
     public String toString() {
         return getClass().getSimpleName() + ": ["+getString()+"]";
     }
+
+    abstract public String color();
+
 }
