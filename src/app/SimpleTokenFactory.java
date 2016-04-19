@@ -30,6 +30,7 @@ public class SimpleTokenFactory implements TokenFactory {
                 Character next = scanner.getNextCharacter();
                 tokenCreator.create(element);
 
+                // tutaj bylo if creator != whitespace
                 if(next != null && (!whitespaceCreator.matches(next))) {
 
                     while (next != null && tokenCreator.hasMoreCharacters()) {
